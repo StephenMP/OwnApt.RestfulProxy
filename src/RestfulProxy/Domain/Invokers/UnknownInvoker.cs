@@ -1,46 +1,35 @@
-﻿using OwnApt.RestfulProxy.Domain.Interface;
+﻿using OwnApt.RestfulProxy.Interface;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace OwnApt.RestfulProxy.Domain.Invokers
 {
-    public class UnknownInvoker : RequestInvoker
+    internal sealed class UnknownInvoker : Invoker
     {
-        #region Public Constructors + Destructors
+        #region Constructors
 
-        public UnknownInvoker() : base(null, null)
+        public UnknownInvoker() : base(null)
         {
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
-        public override IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
+        public override async Task<IRestfulProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IRestfulProxyRequest<TRequestDto, TResponseDto> request)
         {
-            ValidateRequest(request);
-            return BuildUnrecognizedRequestType<TResponseDto>();
+            return await Task.FromResult(BuildUnrecognizedRequestType<TResponseDto>());
         }
 
-        public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
+        private static IRestfulProxyResponse<TResponseDto> BuildUnrecognizedRequestType<TResponseDto>()
         {
-            ValidateRequest(request);
-            return await Task.Run(() => BuildUnrecognizedRequestType<TResponseDto>());
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private static IProxyResponse<TResponseDto> BuildUnrecognizedRequestType<TResponseDto>()
-        {
-            return new ProxyResponse<TResponseDto>
+            return new RestfulProxyResponse<TResponseDto>()
             {
                 StatusCode = HttpStatusCode.MethodNotAllowed,
-                Message = $"Unrecognized request type. Valid types are DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT."
+                ResponseMessage = $"Unrecognized request type. Valid types are DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT."
             };
         }
 
-        #endregion Private Methods
+        #endregion Methods
     }
 }

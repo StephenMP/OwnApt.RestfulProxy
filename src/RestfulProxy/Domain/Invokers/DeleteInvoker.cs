@@ -1,40 +1,32 @@
-﻿using OwnApt.RestfulProxy.Domain.Interface;
+﻿using OwnApt.RestfulProxy.Extension;
+using OwnApt.RestfulProxy.Interface;
 using System.Threading.Tasks;
 
 namespace OwnApt.RestfulProxy.Domain.Invokers
 {
-    public sealed class DeleteInvoker : RequestInvoker
+    internal sealed class DeleteInvoker : Invoker
     {
-        #region Public Constructors + Destructors
+        #region Constructors
 
-        public DeleteInvoker(IProxyConfiguration proxyConfiguration, ICacheProvider cacheProvider) : base(proxyConfiguration, cacheProvider)
+        public DeleteInvoker(IRestfulProxyConfiguration proxyConfiguration) : base(proxyConfiguration)
         {
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
-        public override IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
+        public override async Task<IRestfulProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IRestfulProxyRequest<TRequestDto, TResponseDto> request)
         {
-            ValidateRequest(request);
-            AddHeaders(this.Client, request.Headers);
-            using (var response = this.Client.DeleteAsync(request.Resource).Result)
+            using (var client = HttpClient)
             {
-                return BuildResponse<TResponseDto>(response);
+                using (var response = await client.InvokeDeleteAsync(request))
+                {
+                    return await RestfulProxyResponseFactory.Create<TResponseDto>(response);
+                }
             }
         }
 
-        public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            ValidateRequest(request);
-            AddHeaders(this.Client, request.Headers);
-            using (var response = await this.Client.DeleteAsync(request.Resource))
-            {
-                return BuildResponse<TResponseDto>(response);
-            }
-        }
-
-        #endregion Public Methods
+        #endregion Methods
     }
 }

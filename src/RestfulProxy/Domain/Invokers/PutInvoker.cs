@@ -1,41 +1,32 @@
-﻿using OwnApt.RestfulProxy.Domain.Interface;
-using System.Net.Http;
+﻿using OwnApt.RestfulProxy.Extension;
+using OwnApt.RestfulProxy.Interface;
 using System.Threading.Tasks;
 
 namespace OwnApt.RestfulProxy.Domain.Invokers
 {
-    public sealed class PutInvoker : RequestInvoker
+    internal sealed class PutInvoker : Invoker
     {
-        #region Public Constructors + Destructors
+        #region Constructors
 
-        public PutInvoker(IProxyConfiguration proxyConfiguration, ICacheProvider cacheProvider) : base(proxyConfiguration, cacheProvider)
+        public PutInvoker(IRestfulProxyConfiguration proxyConfiguration) : base(proxyConfiguration)
         {
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
-        public override IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
+        public override async Task<IRestfulProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IRestfulProxyRequest<TRequestDto, TResponseDto> request)
         {
-            ValidateRequest(request);
-            AddHeaders(this.Client, request.Headers);
-            using (var response = this.Client.PutAsJsonAsync(request.Resource, request.RequestDto).Result)
+            using (var client = HttpClient)
             {
-                return BuildResponse<TResponseDto>(response);
+                using (var response = await client.InvokePutAsync(request))
+                {
+                    return await RestfulProxyResponseFactory.Create<TResponseDto>(response);
+                }
             }
         }
 
-        public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            ValidateRequest(request);
-            AddHeaders(this.Client, request.Headers);
-            using (var response = await this.Client.PutAsJsonAsync(request.Resource, request.RequestDto))
-            {
-                return BuildResponse<TResponseDto>(response);
-            }
-        }
-
-        #endregion Public Methods
+        #endregion Methods
     }
 }
