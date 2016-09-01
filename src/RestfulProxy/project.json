@@ -1,19 +1,17 @@
 {
   "version": "1.0.0-*",
 
-  "packOptions": {
-    "summary": "RestfulProxy library for Client to Server communication",
-    "owners": [ "OwnApt, LLC" ]
-  },
-
   "dependencies": {
-    "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
-    "Microsoft.AspNet.WebApi.Client": "5.2.2",
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
-    "System.Net.Http": "4.0.0"
+    "System.Net.Http": "4.1.0",
+    "Authentication": "14.7248.6946"
   },
 
   "frameworks": {
-    "dnx451": {}
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
   }
 }

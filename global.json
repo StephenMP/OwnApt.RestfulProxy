@@ -1,15 +1,6 @@
-﻿{
-  "version": "1.0.0-*",
-
-  "packOptions": {
-    "summary": "RestfulProxy library for Client to Server communication",
-    "owners": [ "OwnApt, LLC" ]
-  },
-
-  "dependencies": {
-  },
-
-  "frameworks": {
-    "dnx451": {}
+{
+  "projects": [ "src", "test", "test-resource" ],
+  "sdk": {
+    "version": "1.0.0-preview2-003121"
   }
 }

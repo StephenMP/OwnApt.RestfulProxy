@@ -3,14 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E26CD174-EF98-4E12-BEB9-E24723EBD7FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6BA870ED-B898-4661-AC7A-89E5B0CF4FB6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF3924EF-9204-4685-9BC4-050409C475D3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DB6766C-6263-4126-B72D-56AFA005544B}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RestfulProxy", "src\RestfulProxy\RestfulProxy.xproj", "{A92E48A2-031E-485B-A062-3CD53C0BA01E}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RestfulProxy", "src\RestfulProxy\RestfulProxy.xproj", "{93157494-F7E2-4096-A7FA-36A86E8F6CAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{54467635-3788-4585-BCAF-F8B83B7519DF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RestfulProxy.Tests.Component", "test\RestfulProxy.Tests.Component\RestfulProxy.Tests.Component.xproj", "{6B35B542-1D55-4DFF-B40C-5248ED3CA9D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-resource", "test-resource", "{3F78288B-A0C7-4B15-83FB-128083376A6A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RestfulProxy.TestResource.Api", "test-resource\RestfulProxy.TestResource.Api\RestfulProxy.TestResource.Api.xproj", "{32024880-A2F9-403B-A42D-0B4D91DD8B25}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RestfulProxy.TestResource.Objects", "test-resource\RestfulProxy.TestResource.Objects\RestfulProxy.TestResource.Objects.xproj", "{A4397059-EFDA-4EED-9DEB-29A8D3CAEAAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,15 +28,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A92E48A2-031E-485B-A062-3CD53C0BA01E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A92E48A2-031E-485B-A062-3CD53C0BA01E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A92E48A2-031E-485B-A062-3CD53C0BA01E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A92E48A2-031E-485B-A062-3CD53C0BA01E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93157494-F7E2-4096-A7FA-36A86E8F6CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93157494-F7E2-4096-A7FA-36A86E8F6CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93157494-F7E2-4096-A7FA-36A86E8F6CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93157494-F7E2-4096-A7FA-36A86E8F6CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B35B542-1D55-4DFF-B40C-5248ED3CA9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B35B542-1D55-4DFF-B40C-5248ED3CA9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B35B542-1D55-4DFF-B40C-5248ED3CA9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B35B542-1D55-4DFF-B40C-5248ED3CA9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32024880-A2F9-403B-A42D-0B4D91DD8B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32024880-A2F9-403B-A42D-0B4D91DD8B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32024880-A2F9-403B-A42D-0B4D91DD8B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32024880-A2F9-403B-A42D-0B4D91DD8B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4397059-EFDA-4EED-9DEB-29A8D3CAEAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4397059-EFDA-4EED-9DEB-29A8D3CAEAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4397059-EFDA-4EED-9DEB-29A8D3CAEAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4397059-EFDA-4EED-9DEB-29A8D3CAEAAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A92E48A2-031E-485B-A062-3CD53C0BA01E} = {E26CD174-EF98-4E12-BEB9-E24723EBD7FB}
+		{93157494-F7E2-4096-A7FA-36A86E8F6CAE} = {6BA870ED-B898-4661-AC7A-89E5B0CF4FB6}
+		{6B35B542-1D55-4DFF-B40C-5248ED3CA9D4} = {54467635-3788-4585-BCAF-F8B83B7519DF}
+		{32024880-A2F9-403B-A42D-0B4D91DD8B25} = {3F78288B-A0C7-4B15-83FB-128083376A6A}
+		{A4397059-EFDA-4EED-9DEB-29A8D3CAEAAA} = {3F78288B-A0C7-4B15-83FB-128083376A6A}
 	EndGlobalSection
 EndGlobal

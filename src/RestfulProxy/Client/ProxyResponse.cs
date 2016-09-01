@@ -3,9 +3,9 @@ using System;
 using System.Net;
 using System.Net.Http.Headers;
 
-namespace OwnApt.RestfulProxy
+namespace OwnApt.RestfulProxy.Client
 {
-    public class RestfulProxyResponse<TResponseDto> : IRestfulProxyResponse<TResponseDto>
+    public class ProxyResponse<TResponseDto> : IProxyResponse<TResponseDto>
     {
         #region Properties
 

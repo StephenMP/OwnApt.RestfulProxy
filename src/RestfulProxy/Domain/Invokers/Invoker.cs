@@ -1,4 +1,4 @@
-﻿using OwnApt.RestfulProxy.Domain.Handlers;
+﻿using OwnApt.Authentication.Client.Handler;
 using OwnApt.RestfulProxy.Interface;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,19 +9,30 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
     {
         #region Fields
 
-        private IRestfulProxyConfiguration proxyConfiguration;
+        private IProxyConfiguration proxyConfiguration;
 
         #endregion Fields
 
         #region Properties
 
-        protected HttpClient HttpClient => new HttpClient(new HmacDelegatingHandler(this.proxyConfiguration));
+        protected HttpClient HttpClient
+        {
+            get
+            {
+                if (this.proxyConfiguration.CacheProvider == null)
+                {
+                    return HttpClientFactory.Create(new HmacDelegatingHandler(this.proxyConfiguration.AppId, this.proxyConfiguration.SecretKey));
+                }
+
+                return HttpClientFactory.Create(new HmacDelegatingHandler(this.proxyConfiguration.AppId, this.proxyConfiguration.SecretKey, this.proxyConfiguration.CacheProvider.RetrieveToken<string>($"hmac-token-{this.proxyConfiguration.AppId}")));
+            }
+        }
 
         #endregion Properties
 
         #region Constructors
 
-        protected Invoker(IRestfulProxyConfiguration proxyConfiguration)
+        protected Invoker(IProxyConfiguration proxyConfiguration)
         {
             this.proxyConfiguration = proxyConfiguration;
         }
@@ -30,7 +41,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 
         #region Methods
 
-        public abstract Task<IRestfulProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IRestfulProxyRequest<TRequestDto, TResponseDto> request);
+        public abstract Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request);
 
         #endregion Methods
     }

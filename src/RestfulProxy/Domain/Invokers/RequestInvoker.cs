@@ -8,7 +8,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
     {
         #region Constructors
 
-        public RequestInvoker(IRestfulProxyConfiguration proxyConfiguration)
+        public RequestInvoker(IProxyConfiguration proxyConfiguration)
         {
             foreach (HttpRequestMethod requestMethod in System.Enum.GetValues(typeof(HttpRequestMethod)))
             {
@@ -20,7 +20,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 
         #region Methods
 
-        private Invoker CreateInvoker(HttpRequestMethod requestType, IRestfulProxyConfiguration proxyConfiguration)
+        private Invoker CreateInvoker(HttpRequestMethod requestType, IProxyConfiguration proxyConfiguration)
         {
             switch (requestType)
             {

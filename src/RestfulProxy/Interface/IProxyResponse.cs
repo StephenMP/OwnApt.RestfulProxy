@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 namespace OwnApt.RestfulProxy.Interface
 {
-    public interface IRestfulProxyResponse<TResponseDto>
+    public interface IProxyResponse<TResponseDto>
     {
         #region Properties
 

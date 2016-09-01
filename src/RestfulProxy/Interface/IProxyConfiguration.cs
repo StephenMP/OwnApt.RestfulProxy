@@ -2,7 +2,7 @@
 
 namespace OwnApt.RestfulProxy.Interface
 {
-    public interface IRestfulProxyConfiguration
+    public interface IProxyConfiguration
     {
         #region Properties
 

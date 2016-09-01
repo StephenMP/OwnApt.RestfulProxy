@@ -1,4 +1,5 @@
-﻿using OwnApt.RestfulProxy.Interface;
+﻿using OwnApt.RestfulProxy.Client;
+using OwnApt.RestfulProxy.Interface;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -16,14 +17,14 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 
         #region Methods
 
-        public override async Task<IRestfulProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IRestfulProxyRequest<TRequestDto, TResponseDto> request)
+        public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
         {
             return await Task.FromResult(BuildUnrecognizedRequestType<TResponseDto>());
         }
 
-        private static IRestfulProxyResponse<TResponseDto> BuildUnrecognizedRequestType<TResponseDto>()
+        private static IProxyResponse<TResponseDto> BuildUnrecognizedRequestType<TResponseDto>()
         {
-            return new RestfulProxyResponse<TResponseDto>()
+            return new ProxyResponse<TResponseDto>()
             {
                 StatusCode = HttpStatusCode.MethodNotAllowed,
                 ResponseMessage = $"Unrecognized request type. Valid types are DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT."

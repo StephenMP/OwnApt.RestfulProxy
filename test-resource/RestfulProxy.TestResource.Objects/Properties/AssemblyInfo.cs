@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RestfulProxy")]
+[assembly: AssemblyProduct("RestfulProxy.TestResource.Objects")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("93157494-f7e2-4096-a7fa-36a86e8f6cae")]
+[assembly: Guid("a4397059-efda-4eed-9deb-29a8d3caeaaa")]

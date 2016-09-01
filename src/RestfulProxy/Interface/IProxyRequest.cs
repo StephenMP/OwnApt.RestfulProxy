@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OwnApt.RestfulProxy.Interface
 {
-    public interface IRestfulProxyRequest<TRequestDto, TResponseDto>
+    public interface IProxyRequest<TRequestDto, TResponseDto>
     {
         #region Properties
 

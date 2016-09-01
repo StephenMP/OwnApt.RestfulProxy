@@ -1,4 +1,5 @@
-﻿using OwnApt.RestfulProxy.Extension;
+﻿using OwnApt.RestfulProxy.Client;
+using OwnApt.RestfulProxy.Extension;
 using OwnApt.RestfulProxy.Interface;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
     {
         #region Constructors
 
-        public DeleteInvoker(IRestfulProxyConfiguration proxyConfiguration) : base(proxyConfiguration)
+        public DeleteInvoker(IProxyConfiguration proxyConfiguration) : base(proxyConfiguration)
         {
         }
 
@@ -16,13 +17,13 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 
         #region Methods
 
-        public override async Task<IRestfulProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IRestfulProxyRequest<TRequestDto, TResponseDto> request)
+        public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
         {
             using (var client = HttpClient)
             {
                 using (var response = await client.InvokeDeleteAsync(request))
                 {
-                    return await RestfulProxyResponseFactory.Create<TResponseDto>(response);
+                    return await ProxyResponseFactory.Create<TResponseDto>(response);
                 }
             }
         }
