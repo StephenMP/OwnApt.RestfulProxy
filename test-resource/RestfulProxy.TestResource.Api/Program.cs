@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
+using System.IO;
 
 namespace RestfulProxy.TestResource.Api
 {
     public class Program
     {
+        #region Public Methods
+
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
@@ -21,5 +19,7 @@ namespace RestfulProxy.TestResource.Api
 
             host.Run();
         }
+
+        #endregion Public Methods
     }
 }

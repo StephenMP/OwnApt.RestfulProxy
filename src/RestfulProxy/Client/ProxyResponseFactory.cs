@@ -9,7 +9,7 @@ namespace OwnApt.RestfulProxy.Client
 {
     internal static class ProxyResponseFactory
     {
-        #region Methods
+        #region Internal Methods
 
         internal static async Task<IProxyResponse<TResponseDto>> Create<TResponseDto>(HttpResponseMessage httpResponseMessage)
         {
@@ -42,6 +42,6 @@ namespace OwnApt.RestfulProxy.Client
             return await Task.FromResult(restfulProxyResponse);
         }
 
-        #endregion Methods
+        #endregion Internal Methods
     }
 }

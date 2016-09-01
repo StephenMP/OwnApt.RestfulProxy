@@ -6,7 +6,7 @@ namespace OwnApt.RestfulProxy.Interface
 {
     public interface IProxyResponse<TResponseDto>
     {
-        #region Properties
+        #region Public Properties
 
         bool IsSuccessfulStatusCode { get; }
         HttpRequestHeaders RequestHeaders { get; }
@@ -16,6 +16,6 @@ namespace OwnApt.RestfulProxy.Interface
         string ResponseMessage { get; }
         HttpStatusCode StatusCode { get; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

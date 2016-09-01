@@ -12,7 +12,14 @@ namespace RestfulProxy.Tests.Component
 {
     internal class RestfulProxySteps
     {
+        #region Internal Fields
+
         internal Uri baseUri;
+
+        #endregion Internal Fields
+
+        #region Private Fields
+
         private string appId = "d63c7a5913dd472481e1d88bbc2bc420";
         private IProxy proxy;
         private IProxyConfiguration proxyConfiguration;
@@ -20,6 +27,15 @@ namespace RestfulProxy.Tests.Component
         private IProxyResponse<TestResponseDto> proxyResponse;
         private TestRequestDto requestDto;
         private string secretKey = "qlTOlX/p2tyQd1k/0T4nLfwB/Lk=";
+
+        #endregion Private Fields
+
+        #region Internal Methods
+
+        internal void GivenIHaveABadBaseUri()
+        {
+            this.baseUri = new Uri("http://www.this.does/not/exit");
+        }
 
         internal void GivenIHaveABaseUri()
         {
@@ -44,6 +60,12 @@ namespace RestfulProxy.Tests.Component
         internal void GivenIHaveATestRequest(HttpRequestMethod requestMethod, bool secured = true)
         {
             this.proxyRequest = new TestRequest(this.baseUri, requestMethod, this.requestDto, secured);
+        }
+
+        internal void ThenICanVerifyIDidNotInvoke()
+        {
+            Assert.NotNull(this.proxyResponse);
+            Assert.False(this.proxyResponse.IsSuccessfulStatusCode);
         }
 
         internal void ThenICanVerifyIGotResponse()
@@ -76,6 +98,10 @@ namespace RestfulProxy.Tests.Component
             this.proxyResponse = await this.proxy.InvokeAsync(this.proxyRequest);
         }
 
+        #endregion Internal Methods
+
+        #region Private Methods
+
         private static int GetFreeTcpPort()
         {
             TcpListener l = new TcpListener(IPAddress.Loopback, 0);
@@ -87,15 +113,6 @@ namespace RestfulProxy.Tests.Component
             return port;
         }
 
-        internal void GivenIHaveABadBaseUri()
-        {
-            this.baseUri = new Uri("http://www.this.does/not/exit");
-        }
-
-        internal void ThenICanVerifyIDidNotInvoke()
-        {
-            Assert.NotNull(this.proxyResponse);
-            Assert.False(this.proxyResponse.IsSuccessfulStatusCode);
-        }
+        #endregion Private Methods
     }
 }

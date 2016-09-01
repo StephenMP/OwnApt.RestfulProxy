@@ -6,7 +6,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 {
     internal sealed class RequestInvoker : Dictionary<HttpRequestMethod, Invoker>
     {
-        #region Constructors
+        #region Public Constructors
 
         public RequestInvoker(IProxyConfiguration proxyConfiguration)
         {
@@ -16,9 +16,9 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
             }
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Private Methods
 
         private Invoker CreateInvoker(HttpRequestMethod requestType, IProxyConfiguration proxyConfiguration)
         {
@@ -50,6 +50,6 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
             }
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

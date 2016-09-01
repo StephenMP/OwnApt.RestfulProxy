@@ -1,13 +1,12 @@
-﻿
-namespace OwnApt.RestfulProxy.Interface
+﻿namespace OwnApt.RestfulProxy.Interface
 {
     public interface IProxyConfiguration
     {
-        #region Properties
+        #region Public Properties
 
         string AppId { get; }
         string SecretKey { get; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

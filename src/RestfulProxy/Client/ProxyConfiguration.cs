@@ -1,21 +1,25 @@
 ﻿using OwnApt.RestfulProxy.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OwnApt.RestfulProxy.Client
 {
     public class ProxyConfiguration : IProxyConfiguration
     {
+        #region Public Constructors
+
         public ProxyConfiguration(string appId, string secretKey)
         {
             this.AppId = appId;
             this.SecretKey = secretKey;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public string AppId { get; }
 
         public string SecretKey { get; }
+
+        #endregion Public Properties
     }
 }

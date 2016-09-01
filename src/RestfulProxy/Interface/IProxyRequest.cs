@@ -6,7 +6,7 @@ namespace OwnApt.RestfulProxy.Interface
 {
     public interface IProxyRequest<TRequestDto, TResponseDto>
     {
-        #region Properties
+        #region Public Properties
 
         IDictionary<string, IEnumerable<string>> Headers { get; }
 
@@ -16,6 +16,6 @@ namespace OwnApt.RestfulProxy.Interface
 
         Uri RequestUri { get; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

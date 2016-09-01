@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +8,8 @@ namespace RestfulProxy.TestResource.Api
 {
     public class Startup
     {
+        #region Public Constructors
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -22,14 +20,15 @@ namespace RestfulProxy.TestResource.Api
             Configuration = builder.Build();
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // Add framework services.
-            services.AddMvc();
-        }
+        #endregion Public Properties
+
+        #region Public Methods
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -39,5 +38,14 @@ namespace RestfulProxy.TestResource.Api
 
             app.UseMvc();
         }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Add framework services.
+            services.AddMvc();
+        }
+
+        #endregion Public Methods
     }
 }

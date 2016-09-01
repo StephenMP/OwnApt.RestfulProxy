@@ -7,7 +7,7 @@ namespace OwnApt.RestfulProxy.Client
 {
     public class ProxyResponse<TResponseDto> : IProxyResponse<TResponseDto>
     {
-        #region Properties
+        #region Public Properties
 
         public bool IsSuccessfulStatusCode { get; set; }
 
@@ -18,6 +18,6 @@ namespace OwnApt.RestfulProxy.Client
         public string ResponseMessage { get; set; }
         public HttpStatusCode StatusCode { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

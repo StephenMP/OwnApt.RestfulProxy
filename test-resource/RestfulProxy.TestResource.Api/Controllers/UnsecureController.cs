@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using OwnApt.Authentication.Api.Filter;
+﻿using Microsoft.AspNetCore.Mvc;
 using RestfulProxy.TestResource.Objects;
+using System.Threading.Tasks;
 
 namespace RestfulProxy.TestResource.Api.Controllers
 {
     [Route("api/[controller]")]
     public class UnsecureController : Controller
     {
+        #region Public Methods
+
         [HttpDelete]
         public async Task<IActionResult> Delete()
         {
@@ -58,5 +56,7 @@ namespace RestfulProxy.TestResource.Api.Controllers
             var content = new TestResponseDto { Value = requestDto.Value };
             return await Task.FromResult(Ok(content));
         }
+
+        #endregion Public Methods
     }
 }

@@ -1,5 +1,10 @@
 {
+  "name": "OwnApt.RestfulProxy",
   "version": "1.0.0-*",
+  "description": "This library contains a generic proxy for interacting with OwnApt APIs",
+  "copyright": "OwnApt, LLC",
+  "authors": [ "OwnApt, LLC" ],
+  "language": "en-US",
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
@@ -13,5 +18,12 @@
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
+  },
+
+  "buildOptions": {
+    "warningsAsErrors": true,
+    "optimize": true,
+    "platform": "x64",
+    "languageVersion": "csharp6"
   }
 }

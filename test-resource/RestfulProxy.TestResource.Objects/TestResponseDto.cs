@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RestfulProxy.TestResource.Objects
+﻿namespace RestfulProxy.TestResource.Objects
 {
     public class TestResponseDto
     {
+        #region Public Properties
+
         public string Value { get; set; }
+
+        #endregion Public Properties
     }
 }

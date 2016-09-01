@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace OwnApt.RestfulProxy.Domain
 {
     public static class HttpClientFactory
     {
+        #region Public Methods
+
         public static HttpClient Create(params DelegatingHandler[] handlers)
         {
             return Create(new HttpClientHandler(), handlers);
@@ -52,5 +52,7 @@ namespace OwnApt.RestfulProxy.Domain
 
             return pipeline;
         }
+
+        #endregion Public Methods
     }
 }

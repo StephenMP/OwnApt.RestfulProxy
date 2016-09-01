@@ -10,7 +10,7 @@ namespace OwnApt.RestfulProxy.Extension
 {
     internal static class HttpClientExtension
     {
-        #region Methods
+        #region Public Methods
 
         public static async Task<HttpResponseMessage> InvokeDeleteAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
         {
@@ -54,6 +54,10 @@ namespace OwnApt.RestfulProxy.Extension
             return await client.InvokeAsJsonAsync(request.RequestUri, "PUT", request.RequestDto);
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         private static void AddHeaders(HttpClient client, IDictionary<string, IEnumerable<string>> headers)
         {
             foreach (var key in headers.Keys)
@@ -77,6 +81,6 @@ namespace OwnApt.RestfulProxy.Extension
             return await client.SendAsync(request);
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

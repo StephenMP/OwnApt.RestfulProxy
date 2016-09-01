@@ -7,22 +7,22 @@ namespace OwnApt.RestfulProxy.Client
 {
     public sealed class Proxy : IProxy
     {
-        #region Fields
+        #region Private Fields
 
         private readonly RequestInvoker requestInvoker;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public Proxy(IProxyConfiguration proxyConfiguration)
         {
             this.requestInvoker = new RequestInvoker(proxyConfiguration);
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
         {
@@ -30,13 +30,12 @@ namespace OwnApt.RestfulProxy.Client
             {
                 return await this.requestInvoker[request.HttpRequestMethod].InvokeAsync(request);
             }
-
-            catch(Exception e)
+            catch (Exception e)
             {
                 return await ProxyResponseFactory.Create<TResponseDto>(e);
             }
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

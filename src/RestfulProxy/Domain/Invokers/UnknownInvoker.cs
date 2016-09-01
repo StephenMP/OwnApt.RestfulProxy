@@ -7,20 +7,24 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 {
     internal sealed class UnknownInvoker : Invoker
     {
-        #region Constructors
+        #region Public Constructors
 
         public UnknownInvoker() : base(null)
         {
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
         {
             return await Task.FromResult(BuildUnrecognizedRequestType<TResponseDto>());
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static IProxyResponse<TResponseDto> BuildUnrecognizedRequestType<TResponseDto>()
         {
@@ -31,6 +35,6 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
             };
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

@@ -7,15 +7,15 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 {
     internal sealed class GetInvoker : Invoker
     {
-        #region Constructors
+        #region Public Constructors
 
         public GetInvoker(IProxyConfiguration proxyConfiguration) : base(proxyConfiguration)
         {
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public override async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request)
         {
@@ -28,6 +28,6 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
             }
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }
