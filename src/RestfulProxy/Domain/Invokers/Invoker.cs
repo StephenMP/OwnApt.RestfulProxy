@@ -15,18 +15,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
 
         #region Properties
 
-        protected HttpClient HttpClient
-        {
-            get
-            {
-                if (this.proxyConfiguration.CacheProvider == null)
-                {
-                    return HttpClientFactory.Create(new HmacDelegatingHandler(this.proxyConfiguration.AppId, this.proxyConfiguration.SecretKey));
-                }
-
-                return HttpClientFactory.Create(new HmacDelegatingHandler(this.proxyConfiguration.AppId, this.proxyConfiguration.SecretKey, this.proxyConfiguration.CacheProvider.RetrieveToken<string>($"hmac-token-{this.proxyConfiguration.AppId}")));
-            }
-        }
+        protected HttpClient HttpClient => HttpClientFactory.Create(new HmacDelegatingHandler(this.proxyConfiguration.AppId, this.proxyConfiguration.SecretKey));
 
         #endregion Properties
 
