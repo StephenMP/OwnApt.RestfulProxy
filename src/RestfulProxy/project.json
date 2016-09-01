@@ -1,5 +1,5 @@
 {
-  "name": "OwnApt.RestfulProxy",
+  "name": "RestfulProxy",
   "version": "1.0.0-*",
   "description": "This library contains a generic proxy for interacting with OwnApt APIs",
   "copyright": "OwnApt, LLC",
