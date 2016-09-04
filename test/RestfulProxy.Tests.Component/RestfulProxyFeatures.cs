@@ -1,18 +1,27 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using OwnApt.RestfulProxy.Domain.Enum;
-using RestfulProxy.TestResource.Api;
+﻿using OwnApt.RestfulProxy.Domain.Enum;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RestfulProxy.Tests.Component
 {
-    public class RestfulProxyFeatures
+    public class RestfulProxyFeatures : IDisposable
     {
         #region Private Fields
 
-        private RestfulProxySteps steps = new RestfulProxySteps();
+        private readonly RestfulProxySteps steps;
+        private bool disposedValue;
 
         #endregion Private Fields
+
+        #region Public Constructors
+
+        public RestfulProxyFeatures()
+        {
+            this.steps = new RestfulProxySteps();
+        }
+
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -24,22 +33,20 @@ namespace RestfulProxy.Tests.Component
         [InlineData(HttpRequestMethod.Patch)]
         [InlineData(HttpRequestMethod.Post)]
         [InlineData(HttpRequestMethod.Put)]
-        public async Task CanInvokeSecuredRequest(HttpRequestMethod requestMethod)
+        public async Task CanInvokeSecuredRequestAsync(HttpRequestMethod requestMethod)
         {
-            this.steps.GivenIHaveABaseUri();
-            using (var testHost = SpinUpApi())
-            {
-                if (requestMethod >= HttpRequestMethod.Patch)
-                {
-                    this.steps.GivenIHaveARequestDto();
-                }
+            this.steps.GivenIHaveATestApi();
 
-                this.steps.GivenIHaveATestRequest(requestMethod);
-                this.steps.GivenIHaveAProxyConfiguration();
-                this.steps.GIvenIHaveAProxy();
-                await this.steps.WhenIInvokeRequest();
-                this.steps.ThenICanVerifyIGotResponse();
+            if (requestMethod >= HttpRequestMethod.Patch)
+            {
+                this.steps.GivenIHaveARequestDto();
             }
+
+            this.steps.GivenIHaveATestRequest(requestMethod);
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GIvenIHaveAProxy();
+            await this.steps.WhenIInvokeRequestAsync();
+            this.steps.ThenICanVerifyIGotResponse();
         }
 
         [Theory]
@@ -50,22 +57,20 @@ namespace RestfulProxy.Tests.Component
         [InlineData(HttpRequestMethod.Patch)]
         [InlineData(HttpRequestMethod.Post)]
         [InlineData(HttpRequestMethod.Put)]
-        public async Task CanInvokeUnsecuredRequest(HttpRequestMethod requestMethod)
+        public async Task CanInvokeUnsecuredRequestAsync(HttpRequestMethod requestMethod)
         {
-            this.steps.GivenIHaveABaseUri();
-            using (var testHost = SpinUpApi())
-            {
-                if (requestMethod >= HttpRequestMethod.Patch)
-                {
-                    this.steps.GivenIHaveARequestDto();
-                }
+            this.steps.GivenIHaveATestApi();
 
-                this.steps.GivenIHaveATestRequest(requestMethod, false);
-                this.steps.GivenIHaveAProxyConfiguration();
-                this.steps.GIvenIHaveAProxy();
-                await this.steps.WhenIInvokeRequest();
-                this.steps.ThenICanVerifyIGotResponse();
+            if (requestMethod >= HttpRequestMethod.Patch)
+            {
+                this.steps.GivenIHaveARequestDto();
             }
+
+            this.steps.GivenIHaveATestRequest(requestMethod, false);
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GIvenIHaveAProxy();
+            await this.steps.WhenIInvokeRequestAsync();
+            this.steps.ThenICanVerifyIGotResponse();
         }
 
         [Theory]
@@ -74,36 +79,46 @@ namespace RestfulProxy.Tests.Component
         [InlineData(HttpRequestMethod.Patch)]
         [InlineData(HttpRequestMethod.Post)]
         [InlineData(HttpRequestMethod.Put)]
-        public async Task CannotInvokeRequestDueToBadResource(HttpRequestMethod requestMethod)
+        public async Task CannotInvokeRequestDueToBadResourceAsync(HttpRequestMethod requestMethod)
         {
+            this.steps.GivenIHaveATestApi();
             this.steps.GivenIHaveABadBaseUri();
-            using (var testHost = SpinUpApi())
-            {
-                if (requestMethod >= HttpRequestMethod.Patch)
-                {
-                    this.steps.GivenIHaveARequestDto();
-                }
 
-                this.steps.GivenIHaveATestRequest(requestMethod);
-                this.steps.GivenIHaveAProxyConfiguration();
-                this.steps.GIvenIHaveAProxy();
-                await this.steps.WhenIInvokeRequest();
-                this.steps.ThenICanVerifyIDidNotInvoke();
+            if (requestMethod >= HttpRequestMethod.Patch)
+            {
+                this.steps.GivenIHaveARequestDto();
             }
+
+            this.steps.GivenIHaveATestRequest(requestMethod);
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GIvenIHaveAProxy();
+            await this.steps.WhenIInvokeRequestAsync();
+            this.steps.ThenICanVerifyIDidNotInvoke();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion Public Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private IWebHost SpinUpApi()
+        protected virtual void Dispose(bool disposing)
         {
-            return new WebHostBuilder()
-                        .UseKestrel()
-                        .UseStartup<Startup>()
-                        .Start(this.steps.baseUri.AbsoluteUri);
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.steps?.Dispose();
+                }
+
+                disposedValue = true;
+            }
         }
 
-        #endregion Private Methods
+        #endregion Protected Methods
     }
 }

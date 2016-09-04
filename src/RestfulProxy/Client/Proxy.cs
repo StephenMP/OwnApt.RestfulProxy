@@ -32,7 +32,7 @@ namespace OwnApt.RestfulProxy.Client
             }
             catch (Exception e)
             {
-                return await ProxyResponseFactory.Create<TResponseDto>(e);
+                return await ProxyResponseFactory.CreateAsync<TResponseDto>(e);
             }
         }
 

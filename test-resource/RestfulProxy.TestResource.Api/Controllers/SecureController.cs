@@ -12,7 +12,7 @@ namespace RestfulProxy.TestResource.Api.Controllers
 
         [HttpDelete]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> DeleteAsync()
         {
             var content = new TestResponseDto { Value = "Hello" };
             return await Task.FromResult(Ok(content));
@@ -20,7 +20,7 @@ namespace RestfulProxy.TestResource.Api.Controllers
 
         [HttpGet]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAsync()
         {
             var content = new TestResponseDto { Value = "Hello" };
             return await Task.FromResult(Ok(content));
@@ -28,14 +28,14 @@ namespace RestfulProxy.TestResource.Api.Controllers
 
         [HttpHead]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Head()
+        public async Task<IActionResult> HeadAsync()
         {
             return await Task.FromResult(Ok());
         }
 
         [HttpOptions]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Options()
+        public async Task<IActionResult> OptionsAsync()
         {
             var content = new TestResponseDto { Value = "Hello" };
             return await Task.FromResult(Ok(content));
@@ -43,7 +43,7 @@ namespace RestfulProxy.TestResource.Api.Controllers
 
         [HttpPatch]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Patch([FromBody] TestRequestDto requestDto)
+        public async Task<IActionResult> PatchAsync([FromBody] TestRequestDto requestDto)
         {
             var content = new TestResponseDto { Value = requestDto.Value };
             return await Task.FromResult(Ok(content));
@@ -51,7 +51,7 @@ namespace RestfulProxy.TestResource.Api.Controllers
 
         [HttpPost]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Post([FromBody] TestRequestDto requestDto)
+        public async Task<IActionResult> PostAsync([FromBody] TestRequestDto requestDto)
         {
             var content = new TestResponseDto { Value = requestDto.Value };
             return await Task.FromResult(Ok(content));
@@ -59,7 +59,7 @@ namespace RestfulProxy.TestResource.Api.Controllers
 
         [HttpPut]
         [HmacAuthenticationFilter]
-        public async Task<IActionResult> Put([FromBody] TestRequestDto requestDto)
+        public async Task<IActionResult> PutAsync([FromBody] TestRequestDto requestDto)
         {
             var content = new TestResponseDto { Value = requestDto.Value };
             return await Task.FromResult(Ok(content));

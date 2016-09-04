@@ -23,7 +23,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
             {
                 using (var response = await client.InvokePatchAsync(request))
                 {
-                    return await ProxyResponseFactory.Create<TResponseDto>(response);
+                    return await ProxyResponseFactory.CreateAsync<TResponseDto>(response);
                 }
             }
         }

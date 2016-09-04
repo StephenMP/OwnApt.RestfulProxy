@@ -1,16 +1,16 @@
 ﻿using OwnApt.RestfulProxy.Client;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
+using OwnApt.TestEnvironment.Environment;
+using RestfulProxy.TestResource.Api;
 using RestfulProxy.TestResource.Objects;
 using System;
-using System.Net;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RestfulProxy.Tests.Component
 {
-    internal class RestfulProxySteps
+    internal class RestfulProxySteps : IDisposable
     {
         #region Internal Fields
 
@@ -20,26 +20,33 @@ namespace RestfulProxy.Tests.Component
 
         #region Private Fields
 
-        private string appId = "d63c7a5913dd472481e1d88bbc2bc420";
+        private readonly string appId = "d63c7a5913dd472481e1d88bbc2bc420";
+        private readonly string secretKey = "qlTOlX/p2tyQd1k/0T4nLfwB/Lk=";
+        private bool disposedValue;
         private IProxy proxy;
         private IProxyConfiguration proxyConfiguration;
         private TestRequest proxyRequest;
         private IProxyResponse<TestResponseDto> proxyResponse;
         private TestRequestDto requestDto;
-        private string secretKey = "qlTOlX/p2tyQd1k/0T4nLfwB/Lk=";
+        private TestingEnvironment testEnvironment;
 
         #endregion Private Fields
+
+        #region Public Methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion Public Methods
 
         #region Internal Methods
 
         internal void GivenIHaveABadBaseUri()
         {
             this.baseUri = new Uri("http://www.this.does/not/exit");
-        }
-
-        internal void GivenIHaveABaseUri()
-        {
-            this.baseUri = new Uri($"http://localhost:{GetFreeTcpPort()}");
         }
 
         internal void GIvenIHaveAProxy()
@@ -55,6 +62,13 @@ namespace RestfulProxy.Tests.Component
         internal void GivenIHaveARequestDto()
         {
             this.requestDto = new TestRequestDto { Value = "Goodbye" };
+        }
+
+        internal void GivenIHaveATestApi()
+        {
+            this.testEnvironment = new TestingEnvironment();
+            this.testEnvironment.AddWebService<Startup>();
+            this.baseUri = this.testEnvironment.WebService<Startup>().BaseUri;
         }
 
         internal void GivenIHaveATestRequest(HttpRequestMethod requestMethod, bool secured = true)
@@ -74,7 +88,6 @@ namespace RestfulProxy.Tests.Component
 
             Assert.True(this.proxyResponse.IsSuccessfulStatusCode);
 
-            // HEAD is not allowed to return a message body, so we are done testing
             if (this.proxyRequest.HttpRequestMethod == HttpRequestMethod.Head)
             {
                 return;
@@ -93,26 +106,28 @@ namespace RestfulProxy.Tests.Component
             }
         }
 
-        internal async Task WhenIInvokeRequest()
+        internal async Task WhenIInvokeRequestAsync()
         {
             this.proxyResponse = await this.proxy.InvokeAsync(this.proxyRequest);
         }
 
         #endregion Internal Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private static int GetFreeTcpPort()
+        protected virtual void Dispose(bool disposing)
         {
-            TcpListener l = new TcpListener(IPAddress.Loopback, 0);
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.testEnvironment?.Dispose();
+                }
 
-            l.Start();
-            int port = ((IPEndPoint)l.LocalEndpoint).Port;
-            l.Stop();
-
-            return port;
+                disposedValue = true;
+            }
         }
 
-        #endregion Private Methods
+        #endregion Protected Methods
     }
 }

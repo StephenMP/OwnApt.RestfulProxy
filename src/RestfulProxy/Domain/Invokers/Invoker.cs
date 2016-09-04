@@ -9,7 +9,7 @@ namespace OwnApt.RestfulProxy.Domain.Invokers
     {
         #region Private Fields
 
-        private IProxyConfiguration proxyConfiguration;
+        private readonly IProxyConfiguration proxyConfiguration;
 
         #endregion Private Fields
 

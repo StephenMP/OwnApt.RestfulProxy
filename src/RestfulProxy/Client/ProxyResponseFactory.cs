@@ -11,7 +11,7 @@ namespace OwnApt.RestfulProxy.Client
     {
         #region Internal Methods
 
-        internal static async Task<IProxyResponse<TResponseDto>> Create<TResponseDto>(HttpResponseMessage httpResponseMessage)
+        internal static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(HttpResponseMessage httpResponseMessage)
         {
             var restfulProxyResponse = new ProxyResponse<TResponseDto>();
 
@@ -30,7 +30,7 @@ namespace OwnApt.RestfulProxy.Client
             return restfulProxyResponse;
         }
 
-        internal static async Task<IProxyResponse<TResponseDto>> Create<TResponseDto>(Exception e)
+        internal static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(Exception e)
         {
             var restfulProxyResponse = new ProxyResponse<TResponseDto>
             {
