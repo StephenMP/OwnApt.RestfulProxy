@@ -16,7 +16,7 @@ namespace OwnApt.RestfulProxy.Domain
 
         public static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
         {
-            HttpMessageHandler pipeline = CreatePipeline(innerHandler, handlers);
+            var pipeline = CreatePipeline(innerHandler, handlers);
             return new HttpClient(pipeline);
         }
 
@@ -24,7 +24,7 @@ namespace OwnApt.RestfulProxy.Domain
         {
             if (innerHandler == null)
             {
-                throw new ArgumentNullException("innerHandler");
+                throw new ArgumentNullException(nameof(innerHandler));
             }
 
             if (handlers == null)
@@ -38,12 +38,12 @@ namespace OwnApt.RestfulProxy.Domain
             {
                 if (handler == null)
                 {
-                    throw new ArgumentException("handlers", "DelegatingHandlerArrayContainsNullItem " + typeof(DelegatingHandler).Name);
+                    throw new ArgumentException(nameof(handlers), "DelegatingHandlerArrayContainsNullItem " + typeof(DelegatingHandler).Name);
                 }
 
                 if (handler.InnerHandler != null)
                 {
-                    throw new ArgumentException("handlers", "DelegatingHandlerArrayHasNonNullInnerHandler " + typeof(DelegatingHandler).Name + " InnerHandler " + handler.GetType().Name);
+                    throw new ArgumentException(nameof(handlers), "DelegatingHandlerArrayHasNonNullInnerHandler " + typeof(DelegatingHandler).Name + " InnerHandler " + handler.GetType().Name);
                 }
 
                 handler.InnerHandler = pipeline;
