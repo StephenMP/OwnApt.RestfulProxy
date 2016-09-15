@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "testRunner": "xunit",
   "dependencies": {
@@ -9,7 +9,7 @@
     "RestfulProxy.TestResource.Api": "1.0.0-*",
     "Microsoft.AspNetCore.TestHost": "1.0.0",
     "RestfulProxy.TestResource.Objects": "1.0.0-*",
-    "TestEnvironment": "14.7295.6307"
+    "TestEnvironment": "14.7369.790"
   },
   "frameworks": {
     "netcoreapp1.0": {
