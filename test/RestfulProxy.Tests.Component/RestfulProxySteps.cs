@@ -28,7 +28,7 @@ namespace RestfulProxy.Tests.Component
         private TestRequest proxyRequest;
         private IProxyResponse<TestResponseDto> proxyResponse;
         private TestRequestDto requestDto;
-        private TestingEnvironment testEnvironment;
+        private OwnAptTestEnvironment testEnvironment;
 
         #endregion Private Fields
 
@@ -66,9 +66,11 @@ namespace RestfulProxy.Tests.Component
 
         internal void GivenIHaveATestApi()
         {
-            this.testEnvironment = new TestingEnvironment();
-            this.testEnvironment.AddWebService<Startup>();
-            this.baseUri = this.testEnvironment.WebService<Startup>().BaseUri;
+            this.testEnvironment = OwnAptTestEnvironment
+                                    .CreateEnvironment()
+                                    .UseResourceWebService<Startup>();
+            
+            this.baseUri = this.testEnvironment.GetResourceWebService<Startup>().BaseUri;
         }
 
         internal void GivenIHaveATestRequest(HttpRequestMethod requestMethod, bool secured = true)
