@@ -9,7 +9,7 @@
     "RestfulProxy.TestResource.Api": "1.0.0-*",
     "Microsoft.AspNetCore.TestHost": "1.0.0",
     "RestfulProxy.TestResource.Objects": "1.0.0-*",
-    "TestEnvironment": "14.7474.4143"
+    "TestEnvironment": "14.7475.7273"
   },
   "frameworks": {
     "netcoreapp1.0": {

@@ -66,9 +66,9 @@ namespace RestfulProxy.Tests.Component
 
         internal void GivenIHaveATestApi()
         {
-            this.testEnvironment = OwnAptTestEnvironment
-                                    .CreateEnvironment()
-                                    .UseResourceWebService<Startup>();
+            this.testEnvironment = new OwnAptTestEnvironmentBuilder()
+                                    .AddResourceWebService<Startup>()
+                                    .BuildEnvironment();
             
             this.baseUri = this.testEnvironment.GetResourceWebService<Startup>().BaseUri;
         }
