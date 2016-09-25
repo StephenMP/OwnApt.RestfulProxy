@@ -15,7 +15,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "RestfulProxy.TestResource.Objects": "1.0.0-*",
-    "Authentication": "14.7414.5796"
+    "Authentication": "14.7478.2443"
   },
 
   "tools": {

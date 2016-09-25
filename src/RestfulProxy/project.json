@@ -11,7 +11,7 @@
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
     "System.Net.Http": "4.1.0",
-    "Authentication": "14.7414.5796"
+    "Authentication": "14.7478.2443"
   },
 
   "frameworks": {
